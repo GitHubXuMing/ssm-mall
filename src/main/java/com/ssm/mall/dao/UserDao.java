@@ -16,7 +16,19 @@ public interface UserDao {
 
     int updateByPrimaryKey(User record);
 
+    /**
+     *
+     * @param username 用户名
+     * @return 整数，计算有该用户名的用户数量
+     */
     int checkUsername(String username);
 
-    User login(@Param("username")String username,@Param("password") String password);
+    /**
+     *
+     * @param username 用户名
+     * @param password 密码
+     * @return 登录成功，返回找到的用户信息，否则，返回NULL
+     */
+    User login(@Param("username") String username,@Param("password") String password);
+
 }

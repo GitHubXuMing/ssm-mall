@@ -9,6 +9,19 @@ public class ServerRes<T> implements Serializable {
     private int status;
     private String msg;
     private T data;
+
+    public int getStatus() {
+        return status;
+    }
+
+    public String getMsg() {
+        return msg;
+    }
+
+    public T getData() {
+        return data;
+    }
+
     //构造函数的类型如何设计(最左前缀原则)
     private ServerRes(int status) {
         this.status = status;
