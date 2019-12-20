@@ -19,6 +19,7 @@ import javax.servlet.http.HttpSession;
 public class UserAction {
     @Autowired
     UserService userService;
+    //1.1登录
     @RequestMapping(value = "login.do",method = RequestMethod.POST)
     public @ResponseBody  ServerRes<User> login(
             @RequestParam String username,
@@ -29,4 +30,11 @@ public class UserAction {
         }
         return result;
     }
+    //1.2注销
+    @RequestMapping(value = "logout.do",method = RequestMethod.GET)
+    public @ResponseBody ServerRes logout(HttpSession session){
+        session.removeAttribute(Const.CURRENT_USER);
+        return ServerRes.success(Result.LOGOUT_SUCCESS);
+    }
+
 }

@@ -6,7 +6,8 @@ public enum Result {
     USER_ALREADY_EXIST(102,"用户名已存在"),
     USER_NOT_EXISTS(103,"用户名不存在"),
     PASSWORD_ERROR(104,"密码错误"),
-    LOGIN_SUCCESS(201,"登录成功")
+    LOGIN_SUCCESS(201,"登录成功"),
+    LOGOUT_SUCCESS(202,"注销成功"),
     ;
 
     private final int status;
