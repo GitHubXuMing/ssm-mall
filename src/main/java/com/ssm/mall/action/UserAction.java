@@ -19,42 +19,51 @@ import javax.servlet.http.HttpSession;
 public class UserAction {
     @Autowired
     UserService userService;
+
     //1.1登录
-    @RequestMapping(value = "login.do",method = RequestMethod.POST)
-    public @ResponseBody  ServerRes<User> login(
+    @RequestMapping(value = "login.do", method = RequestMethod.POST)
+    public @ResponseBody
+    ServerRes<User> login(
             @RequestParam String username,
-            @RequestParam(value = "password",required = true) String password, HttpSession session){
-        ServerRes<User> result = userService.login(username,password);
-        if(result.getStatus() == Result.LOGIN_SUCCESS.getStatus()){
-            session.setAttribute(Const.CURRENT_USER,result.getData());
+            @RequestParam(value = "password", required = true) String password, HttpSession session) {
+        ServerRes<User> result = userService.login(username, password);
+        if (result.getStatus() == Result.LOGIN_SUCCESS.getStatus()) {
+            session.setAttribute(Const.CURRENT_USER, result.getData());
         }
         return result;
     }
+
     //1.2注销
-    @RequestMapping(value = "logout.do",method = RequestMethod.GET)
-    public @ResponseBody ServerRes logout(HttpSession session){
+    @RequestMapping(value = "logout.do", method = RequestMethod.GET)
+    public @ResponseBody
+    ServerRes logout(HttpSession session) {
         session.removeAttribute(Const.CURRENT_USER);
         return ServerRes.success(Result.LOGOUT_SUCCESS);
     }
 
     //1.3用户注册
-    @RequestMapping(value = "regist.do",method = RequestMethod.POST)
-    public @ResponseBody ServerRes registUser(User user){
+    @RequestMapping(value = "regist.do", method = RequestMethod.POST)
+    public @ResponseBody
+    ServerRes registUser(User user) {
         return userService.registry(user);
     }
 
     //1.4获取已登录的用户信息
-    @RequestMapping(value = "getUserInfo.do",method = RequestMethod.POST)
-    public @ResponseBody ServerRes<User> getLoginedUserInfo(HttpSession session){
+    @RequestMapping(value = "getUserInfo.do", method = RequestMethod.POST)
+    public @ResponseBody
+    ServerRes<User> getLoginedUserInfo(HttpSession session) {
         User user = (User) session.getAttribute(Const.CURRENT_USER);
-        if(user != null){
+        if (user != null) {
             //如果session中存在CURRENT_USER，表示用户已登录，返回session中的用户信息即可
-            return ServerRes.success(Result.RESULT_SUCCESS,user);
+            return ServerRes.success(Result.RESULT_SUCCESS, user);
         }
         return ServerRes.error(Result.NEED_LOGIN);
     }
 
-    //1.5用户忘记密码，获得密码重置的预设问题
-
+    //1.5用户忘记密码，根据用户名获得密码重置的预设问题
+    @RequestMapping(value = "getResetQuestion.do", method = RequestMethod.POST)
+    public @ResponseBody ServerRes<String> getPasswordResetQuestion(String username) {
+        return userService.getQuestionByUsername(username);
+    }
 
 }

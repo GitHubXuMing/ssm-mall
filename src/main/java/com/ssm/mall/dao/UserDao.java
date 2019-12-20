@@ -31,6 +31,18 @@ public interface UserDao {
      */
     User login(@Param("username") String username,@Param("password") String password);
 
+    /**
+     * 检查邮件是否已存在
+     * @param email
+     * @return
+     */
     int checkEmail(String email);
+
+    /**
+     * 根据用户名查询密码重置的预设问题
+     * @param username
+     * @return
+     */
+    String getQuestionByUsername(String username);
 
 }

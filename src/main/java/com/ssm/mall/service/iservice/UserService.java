@@ -27,4 +27,11 @@ public interface UserService {
      */
     public ServerRes registry(User user);
 
+    /**
+     * 用户忘记密码，根据用户名获得密码重置的预设问题
+     * @param username
+     * @return
+     */
+    public ServerRes<String> getQuestionByUsername(String username);
+
 }

@@ -71,4 +71,22 @@ public class UserServiceImpl implements UserService {
         int regCount = userDao.insert(user);//思考：此处是否可以使用动态insert方法？）
         return regCount > 0 ? ServerRes.success(Result.REGISTRY_SUCCESS) : ServerRes.error(Result.REGISTRY_ERROR);
     }
+
+    @Override
+    public ServerRes<String> getQuestionByUsername(String username) {
+        //判断用户名是否存在
+        int uFlag = userDao.checkUsername(username);
+        if(uFlag < 1){
+            return ServerRes.error(Result.USER_NOT_EXISTS);
+        }else{
+            //如果存在，取出预设问题
+            String question = userDao.getQuestionByUsername(username);
+            //根据预设问题是否为空，反馈不同信息
+            if(StringUtils.isNotBlank(question)) {
+                return ServerRes.success(Result.RESULT_SUCCESS, question);
+            }else{
+                return ServerRes.error(Result.NO_PASSWORD_RESET_QUESTION);
+            }
+        }
+    }
 }

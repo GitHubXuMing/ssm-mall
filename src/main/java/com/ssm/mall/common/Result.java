@@ -15,6 +15,7 @@ public enum Result {
     REGISTRY_ERROR(107,"注册失败"),
     CONFIG_READ_ERROR(108,"属性配置文件读取异常"),
     NEED_LOGIN(109,"无法查看用户信息，请先登录"),
+    NO_PASSWORD_RESET_QUESTION(110,"对不起，您没有设置重置密码的预设问题"),
     ;
 
     private final int status;
