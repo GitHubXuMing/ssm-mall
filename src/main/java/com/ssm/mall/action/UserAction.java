@@ -43,4 +43,18 @@ public class UserAction {
         return userService.registry(user);
     }
 
+    //1.4获取已登录的用户信息
+    @RequestMapping(value = "getUserInfo.do",method = RequestMethod.POST)
+    public @ResponseBody ServerRes<User> getLoginedUserInfo(HttpSession session){
+        User user = (User) session.getAttribute(Const.CURRENT_USER);
+        if(user != null){
+            //如果session中存在CURRENT_USER，表示用户已登录，返回session中的用户信息即可
+            return ServerRes.success(Result.RESULT_SUCCESS,user);
+        }
+        return ServerRes.error(Result.NEED_LOGIN);
+    }
+
+    //1.5用户忘记密码，获得密码重置的预设问题
+
+
 }

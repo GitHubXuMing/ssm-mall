@@ -18,7 +18,7 @@ public class PropertyUtil {
         try {
             props.load(new InputStreamReader(PropertyUtil.class.getClassLoader().getResourceAsStream(fileName),"UTF-8"));
         } catch (IOException e) {
-            logger.error(Result.CONFIG_READ_ERRO.getMsg(),e);
+            logger.error(Result.CONFIG_READ_ERROR.getMsg(),e);
         }
     }
     public static String getProperty(String key){
