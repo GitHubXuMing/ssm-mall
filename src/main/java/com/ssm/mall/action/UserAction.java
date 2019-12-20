@@ -37,4 +37,10 @@ public class UserAction {
         return ServerRes.success(Result.LOGOUT_SUCCESS);
     }
 
+    //1.3用户注册
+    @RequestMapping(value = "regist.do",method = RequestMethod.POST)
+    public @ResponseBody ServerRes registUser(User user){
+        return userService.registry(user);
+    }
+
 }
