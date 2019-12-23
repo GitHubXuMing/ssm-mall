@@ -34,4 +34,11 @@ public interface UserService {
      */
     public ServerRes<String> getQuestionByUsername(String username);
 
+    /**
+     * 验证用户答案是否正确
+     * @param answer
+     * @return ServerRes<String>  将token放入ServerRes对象中
+      */
+    public ServerRes<String> checkPreAnswer(String username,String question,String answer);
+
 }

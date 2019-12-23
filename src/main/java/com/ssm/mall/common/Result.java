@@ -3,6 +3,7 @@ package com.ssm.mall.common;
 public enum Result {
     RESULT_SUCCESS(200,"success"),
     RESULT_ERROR(500,"error"),
+    //用户模块
     USER_ALREADY_EXIST(102,"用户名已存在"),
     USER_NOT_EXISTS(103,"用户名不存在"),
     PASSWORD_ERROR(104,"密码错误"),
@@ -16,6 +17,7 @@ public enum Result {
     CONFIG_READ_ERROR(108,"属性配置文件读取异常"),
     NEED_LOGIN(109,"无法查看用户信息，请先登录"),
     NO_PASSWORD_RESET_QUESTION(110,"对不起，您没有设置重置密码的预设问题"),
+    PASSWORD_RESET_ANSWER_ERROR(111,"预设问题答案不符，无法重置密码"),
     ;
 
     private final int status;

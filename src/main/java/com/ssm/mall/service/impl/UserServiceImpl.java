@@ -6,10 +6,13 @@ import com.ssm.mall.common.ServerRes;
 import com.ssm.mall.dao.UserDao;
 import com.ssm.mall.dao.pojo.User;
 import com.ssm.mall.service.iservice.UserService;
+import com.ssm.mall.util.GuavaCache;
 import com.ssm.mall.util.MD5Util;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.UUID;
 
 @Service("userService")
 public class UserServiceImpl implements UserService {
@@ -88,5 +91,19 @@ public class UserServiceImpl implements UserService {
                 return ServerRes.error(Result.NO_PASSWORD_RESET_QUESTION);
             }
         }
+    }
+
+    //根据用户名和取出的问题，去验证预设问题
+    @Override
+    public ServerRes<String> checkPreAnswer(String username, String question, String answer) {
+        int paFlag = userDao.checkPreAnswer(username,question,answer);
+        if(paFlag > 0){
+            //如果预设答案一致，则生成token令牌，存入GUAVA缓存
+            //UUID是通用唯一识别码(UniversallyUniqueIdentifier)的缩写，例如：9e3e3d65-77d0-4811-b0d3-77336bad8590
+            String tokenValue = UUID.randomUUID().toString();
+            GuavaCache.setTokenToCache(Const.TOKEN_PREFIX+username,tokenValue);
+            return ServerRes.success(Result.RESULT_SUCCESS,tokenValue);
+        }
+        return ServerRes.error(Result.PASSWORD_RESET_ANSWER_ERROR);
     }
 }

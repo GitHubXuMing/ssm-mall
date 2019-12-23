@@ -66,4 +66,9 @@ public class UserAction {
         return userService.getQuestionByUsername(username);
     }
 
+    //1.6根据用户名、预设问题检验预设答案
+    @RequestMapping(value = "checkPreAnswer.do", method = RequestMethod.POST)
+    public @ResponseBody ServerRes<String> checkPreAnswer(String username,String question,String answer) {
+        return userService.checkPreAnswer(username,question,answer);
+    }
 }

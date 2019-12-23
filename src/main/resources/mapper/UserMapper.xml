@@ -38,6 +38,14 @@
     <select id="getQuestionByUsername" parameterType="string" resultType="java.lang.String">
         select question from t_user where username=#{username}
     </select>
+    <select id="checkPreAnswer" resultType="integer" parameterType="map">
+        select count(1) from t_user where
+        username=#{username}
+        and
+        question=#{question}
+        and
+        answer=#{answer}
+    </select>
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from t_user

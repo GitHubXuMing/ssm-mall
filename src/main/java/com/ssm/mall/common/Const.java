@@ -2,6 +2,8 @@ package com.ssm.mall.common;
 
 public interface Const {
     String CURRENT_USER = "current_user";
+    String TOKEN_PREFIX = "token_";//设定token令牌前缀
+
     //确定验证类型是用户名，还是email
     interface ValidType{
         String USERNAME = "username";
@@ -12,4 +14,5 @@ public interface Const {
         Integer ADMIN = 0;
         Integer USER = 1;
     }
+
 }

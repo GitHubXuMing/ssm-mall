@@ -54,4 +54,10 @@ public class UserServiceImplTest {
         ServerRes sr =  userService.registry(user);
         System.err.println("*******************************"+sr);
     }
+
+    @Test
+    public void checkPreAnswer() {
+        System.err.println(userService.checkPreAnswer("scott","qu","an"));
+        System.err.println(userService.checkPreAnswer("scott","qu","errAn"));
+    }
 }
