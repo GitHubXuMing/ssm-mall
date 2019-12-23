@@ -41,4 +41,12 @@ public interface UserService {
       */
     public ServerRes<String> checkPreAnswer(String username,String question,String answer);
 
+    /**
+     * 预设问题验证成功后，应用username和token对密码进行重置
+     * @param username
+     * @param token
+     * @param newPassword
+     * @return
+     */
+    public ServerRes resetPassword(String username,String token,String newPassword);
 }

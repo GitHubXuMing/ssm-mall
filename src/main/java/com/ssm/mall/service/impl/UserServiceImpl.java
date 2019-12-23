@@ -106,4 +106,32 @@ public class UserServiceImpl implements UserService {
         }
         return ServerRes.error(Result.PASSWORD_RESET_ANSWER_ERROR);
     }
+
+    @Override
+    public ServerRes resetPassword(String username, String token, String newPassword) {
+        //验证token令牌参数是否正常传递
+        if(StringUtils.isBlank(token)){
+            return ServerRes.error(Result.NEED_TOKEN);
+        }
+        //验证用户名是否存在
+        if(userDao.checkUsername(username) < 1){
+            return ServerRes.error(Result.USER_NOT_EXISTS);
+        }
+        //验证服务器GUAVA缓存中的TOKEN令牌是否已过期
+        String serverToken = GuavaCache.getTokenFromCache(Const.TOKEN_PREFIX+username);
+        if(StringUtils.isBlank(serverToken)){
+            ServerRes.error(Result.TOKEN_EXPIRE);
+        }
+        //验证guava缓存中的令牌与客户提供的令牌是否一致
+        if(StringUtils.equals(token,serverToken)){
+            //此处要先将密码进行MD5加密，然后更新原密码
+           int resetFlag = userDao.resetPassword(username,MD5Util.MD5EncodeUtf8(newPassword));
+           if(resetFlag > 0) {
+               return ServerRes.success(Result.PASSWORD_RESET_SUCCESS);
+           }
+        }else{
+            return ServerRes.error(Result.TOKEN_ERROR);
+        }
+        return ServerRes.error(Result.PASSWORD_RESET_ERROR);
+    }
 }

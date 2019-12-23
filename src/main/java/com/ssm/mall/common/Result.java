@@ -3,14 +3,16 @@ package com.ssm.mall.common;
 public enum Result {
     RESULT_SUCCESS(200,"success"),
     RESULT_ERROR(500,"error"),
-    //用户模块
-    USER_ALREADY_EXIST(102,"用户名已存在"),
-    USER_NOT_EXISTS(103,"用户名不存在"),
-    PASSWORD_ERROR(104,"密码错误"),
+    //用户模块-SUCCESS
     LOGIN_SUCCESS(201,"登录成功"),
     LOGOUT_SUCCESS(202,"注销成功"),
     REGISTRY_VALID_SUCCESS(203,"注册名称验证成功，用户名或邮箱可用"),
     REGISTRY_SUCCESS(204,"注册成功"),
+    PASSWORD_RESET_SUCCESS(205,"密码重置成功"),
+    //用户模块-ERROR
+    USER_ALREADY_EXIST(102,"用户名已存在"),
+    USER_NOT_EXISTS(103,"用户名不存在"),
+    PASSWORD_ERROR(104,"密码错误"),
     EMAIL_ALREADY_EXIST(105,"EMAIL邮箱已存在"),
     REGISTRY_ILLEAGEL_ARGUMENT(106,"参数类型错误，只能选择用户名或EMAIL邮箱"),
     REGISTRY_ERROR(107,"注册失败"),
@@ -18,6 +20,10 @@ public enum Result {
     NEED_LOGIN(109,"无法查看用户信息，请先登录"),
     NO_PASSWORD_RESET_QUESTION(110,"对不起，您没有设置重置密码的预设问题"),
     PASSWORD_RESET_ANSWER_ERROR(111,"预设问题答案不符，无法重置密码"),
+    NEED_TOKEN(112,"参数错误，需要传递token令牌"),
+    TOKEN_EXPIRE(113,"token令牌已过期"),
+    TOKEN_ERROR(114,"token令牌无效，请重新获取"),
+    PASSWORD_RESET_ERROR(115,"密码重置失败"),
     ;
 
     private final int status;

@@ -71,4 +71,10 @@ public class UserAction {
     public @ResponseBody ServerRes<String> checkPreAnswer(String username,String question,String answer) {
         return userService.checkPreAnswer(username,question,answer);
     }
+
+    //1.7根据Token令牌和用户名重置用户密码
+    @RequestMapping(value = "resetPassword.do", method = RequestMethod.POST)
+    public @ResponseBody ServerRes resetPassword(String username,String token,String newPassword) {
+        return userService.resetPassword(username,token,newPassword);
+    }
 }

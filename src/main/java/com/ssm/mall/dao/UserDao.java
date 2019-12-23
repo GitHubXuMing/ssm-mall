@@ -49,4 +49,8 @@ public interface UserDao {
                        @Param("question") String question,
                        @Param("answer") String answer);
 
+    int resetPassword(
+            @Param("username") String username,
+            @Param("newPassword") String newPassword);
+
 }
