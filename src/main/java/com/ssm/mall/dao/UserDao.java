@@ -53,4 +53,10 @@ public interface UserDao {
             @Param("username") String username,
             @Param("newPassword") String newPassword);
 
+    String getPasswordById(Integer id);
+
+    int modifyPassword(
+            @Param("userid") Integer id,
+            @Param("newPassword") String newPassword);
+
 }

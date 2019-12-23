@@ -49,4 +49,14 @@ public interface UserService {
      * @return
      */
     public ServerRes resetPassword(String username,String token,String newPassword);
+
+    /**
+     * 已登录用户修改密码，需要先输入原密码进行校验
+     * @param id
+     * @param originPassword
+     * @param newPassword
+     * @return
+     */
+    ServerRes modifyPassword(Integer id, String originPassword, String newPassword);
+
 }

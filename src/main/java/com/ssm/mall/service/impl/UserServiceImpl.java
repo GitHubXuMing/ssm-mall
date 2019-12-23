@@ -134,4 +134,21 @@ public class UserServiceImpl implements UserService {
         }
         return ServerRes.error(Result.PASSWORD_RESET_ERROR);
     }
+
+    @Override
+    public ServerRes modifyPassword(Integer id, String originPassword, String newPassword) {
+        String userPwd = userDao.getPasswordById(id);
+        if(StringUtils.equals(userPwd,MD5Util.MD5EncodeUtf8(originPassword))){
+            int modifyFlag = userDao.modifyPassword(id,MD5Util.MD5EncodeUtf8(newPassword));
+            if(modifyFlag > 0){
+                return ServerRes.success(Result.MODIFY_PASSWORD_SUCCESS);
+            }else{
+                return ServerRes.error(Result.MODIFY_PASSWORD_ERROR);
+            }
+        }else{
+            return ServerRes.error(Result.ORIGIN_PASSWORD_ERROR);
+        }
+    }
+
+
 }

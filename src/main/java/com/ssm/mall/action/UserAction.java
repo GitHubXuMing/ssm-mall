@@ -77,4 +77,18 @@ public class UserAction {
     public @ResponseBody ServerRes resetPassword(String username,String token,String newPassword) {
         return userService.resetPassword(username,token,newPassword);
     }
+
+    //1.8登录状态下，对用户密码进行修改(需要输入原密码）
+    @RequestMapping(value = "modifyPassword.do", method = RequestMethod.POST)
+    public @ResponseBody ServerRes modifyPassword(
+            String originPassword,//原密码
+            String newPassword,//新密码
+            HttpSession session) {
+        User user = (User) session.getAttribute(Const.CURRENT_USER);
+        if( user == null){
+            return ServerRes.error(Result.NEED_LOGIN);
+        }
+        return userService.modifyPassword(user.getId(),originPassword,newPassword);
+    }
+
 }

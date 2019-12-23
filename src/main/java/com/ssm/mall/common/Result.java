@@ -9,6 +9,7 @@ public enum Result {
     REGISTRY_VALID_SUCCESS(203,"注册名称验证成功，用户名或邮箱可用"),
     REGISTRY_SUCCESS(204,"注册成功"),
     PASSWORD_RESET_SUCCESS(205,"密码重置成功"),
+    MODIFY_PASSWORD_SUCCESS(206,"修改密码成功" ),
     //用户模块-ERROR
     USER_ALREADY_EXIST(102,"用户名已存在"),
     USER_NOT_EXISTS(103,"用户名不存在"),
@@ -24,6 +25,8 @@ public enum Result {
     TOKEN_EXPIRE(113,"token令牌已过期"),
     TOKEN_ERROR(114,"token令牌无效，请重新获取"),
     PASSWORD_RESET_ERROR(115,"密码重置失败"),
+    MODIFY_PASSWORD_ERROR(116,"密码修改失败"),
+    ORIGIN_PASSWORD_ERROR(117,"原始密码校验失败"),
     ;
 
     private final int status;

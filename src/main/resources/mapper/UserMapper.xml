@@ -46,6 +46,9 @@
         and
         answer=#{answer}
     </select>
+    <select id="getPasswordById" parameterType="int" resultType="java.lang.String">
+        select password from t_user where id=#{id}
+    </select>
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from t_user
@@ -179,5 +182,11 @@
       password=#{newPassword},
       update_time=now()
       where username=#{username}
+    </update>
+    <update id="modifyPassword" parameterType="map">
+      update t_user set
+      password=#{newPassword},
+      update_time = now()
+      where id=#{userid}
     </update>
 </mapper>
