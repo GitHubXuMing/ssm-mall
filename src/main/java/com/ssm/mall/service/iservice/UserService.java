@@ -59,4 +59,17 @@ public interface UserService {
      */
     ServerRes modifyPassword(Integer id, String originPassword, String newPassword);
 
+    /**
+     * 获得已登录用户的用户信息
+     * @param userid
+     * @return
+     */
+    ServerRes<User> getLoginUserInfo(Integer userid);
+
+    /**
+     * 修改已登录用户的用户信息
+     * @param newUser
+     * @return
+     */
+    ServerRes<User> modifyLoginUserInfo(User newUser);
 }

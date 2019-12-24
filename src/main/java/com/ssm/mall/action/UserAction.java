@@ -5,6 +5,7 @@ import com.ssm.mall.common.Result;
 import com.ssm.mall.common.ServerRes;
 import com.ssm.mall.dao.pojo.User;
 import com.ssm.mall.service.iservice.UserService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -89,6 +90,30 @@ public class UserAction {
             return ServerRes.error(Result.NEED_LOGIN);
         }
         return userService.modifyPassword(user.getId(),originPassword,newPassword);
+    }
+    @RequestMapping(value = "loginUserInfo.do",method = RequestMethod.POST)
+    public @ResponseBody ServerRes<User> getLoginUserInfo(HttpSession session){
+        User user = (User) session.getAttribute(Const.CURRENT_USER);
+        if(user == null){
+            return ServerRes.error(Result.NEED_LOGIN);
+        }
+        return userService.getLoginUserInfo(user.getId());
+    }
+    @RequestMapping(value = "modifyUserInfo.do",method = RequestMethod.POST)
+    public @ResponseBody ServerRes<User> modifyUserInfo(User newUser,HttpSession session){
+        //从session中取出原user数据
+        User user = (User) session.getAttribute(Const.CURRENT_USER);
+        if(user ==  null){
+            return ServerRes.error(Result.NEED_LOGIN);
+        }
+        //userId、username不允许更改，界面中不会出现文本框，因此要对newUser进行赋值
+        newUser.setId(user.getId());
+        newUser.setUsername(user.getUsername());
+        ServerRes sr = userService.modifyLoginUserInfo(newUser);//更新用户信息
+        if(sr.getStatus() == Result.RESULT_SUCCESS.getStatus()){// 更新成功，将更新后的用户信息放入session中
+            session.setAttribute(Const.CURRENT_USER,newUser);
+        }
+        return sr; //返回成功信息
     }
 
 }

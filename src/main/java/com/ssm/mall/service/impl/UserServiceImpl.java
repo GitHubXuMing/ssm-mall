@@ -150,5 +150,32 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    @Override
+    public ServerRes<User> getLoginUserInfo(Integer userid) {
+        User  user = userDao.selectByPrimaryKey(userid);
+        if(user == null){
+            return ServerRes.error(Result.USER_NOT_FOUND);
+        }
+        user.setPassword(StringUtils.EMPTY);
+        return ServerRes.success(Result.RESULT_SUCCESS,user);
+    }
+
+    @Override
+    public ServerRes<User> modifyLoginUserInfo(User newUser) {
+        //业务要求，修改的email不能是其他用户已注册的邮箱地址，所以需要校验邮箱地址
+        //思考：为什么不能使用已有的checkEmail？
+        // 如果邮箱并没有更改，该邮箱地址依然存在于数据库中，检测报错，需要排除对象本身的userid
+        int eFlag = userDao.checkEmailByUserId(newUser.getId(),newUser.getEmail());
+        if(eFlag > 0){
+            return ServerRes.error(Result.EMAIL_ALREADY_EXIST);
+        }
+        //更新用户信息
+        int modifyUserFlag = userDao.updateByPrimaryKey(newUser);
+        if(modifyUserFlag < 1){
+            return ServerRes.error(Result.MODIFY_USER_ERROR);
+        }
+        return ServerRes.success(Result.RESULT_SUCCESS,newUser);
+    }
+
 
 }

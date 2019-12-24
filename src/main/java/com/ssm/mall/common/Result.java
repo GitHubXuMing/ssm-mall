@@ -27,6 +27,8 @@ public enum Result {
     PASSWORD_RESET_ERROR(115,"密码重置失败"),
     MODIFY_PASSWORD_ERROR(116,"密码修改失败"),
     ORIGIN_PASSWORD_ERROR(117,"原始密码校验失败"),
+    USER_NOT_FOUND(118,"该用户没有找到"),
+    MODIFY_USER_ERROR(119,"修改用户信息失败")
     ;
 
     private final int status;

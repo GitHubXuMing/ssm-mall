@@ -59,4 +59,8 @@ public interface UserDao {
             @Param("userid") Integer id,
             @Param("newPassword") String newPassword);
 
+    int checkEmailByUserId(
+            @Param("userid") Integer userid,
+            @Param("email") String email);
+
 }

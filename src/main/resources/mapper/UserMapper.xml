@@ -49,6 +49,11 @@
     <select id="getPasswordById" parameterType="int" resultType="java.lang.String">
         select password from t_user where id=#{id}
     </select>
+    <select id="checkEmailByUserId" parameterType="map" resultType="java.lang.Integer">
+        select count(1) from t_user
+        where email=#{email}
+        and id != #{userid}
+    </select>
 
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from t_user
@@ -166,15 +171,11 @@
     </update>
     <update id="updateByPrimaryKey" parameterType="com.ssm.mall.dao.pojo.User">
     update t_user
-    set username = #{username,jdbcType=VARCHAR},
-      password = #{password,jdbcType=VARCHAR},
-      email = #{email,jdbcType=VARCHAR},
-      phone = #{phone,jdbcType=VARCHAR},
-      question = #{question,jdbcType=VARCHAR},
-      answer = #{answer,jdbcType=VARCHAR},
-      role = #{role,jdbcType=INTEGER},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      update_time = now()
+    set email = #{email,jdbcType=VARCHAR},
+        phone = #{phone,jdbcType=VARCHAR},
+        question = #{question,jdbcType=VARCHAR},
+        answer = #{answer,jdbcType=VARCHAR},
+        update_time = now()
     where id = #{id,jdbcType=INTEGER}
   </update>
     <update id="resetPassword" parameterType="map">
