@@ -1,4 +1,4 @@
-package com.ssm.mall.action;
+package com.ssm.mall.action.protal;
 
 import com.ssm.mall.common.Const;
 import com.ssm.mall.common.Result;

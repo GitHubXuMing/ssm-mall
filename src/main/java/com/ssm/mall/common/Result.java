@@ -28,7 +28,8 @@ public enum Result {
     MODIFY_PASSWORD_ERROR(116,"密码修改失败"),
     ORIGIN_PASSWORD_ERROR(117,"原始密码校验失败"),
     USER_NOT_FOUND(118,"该用户没有找到"),
-    MODIFY_USER_ERROR(119,"修改用户信息失败")
+    MODIFY_USER_ERROR(119,"修改用户信息失败"),
+    ADMIN_LOGIN_ERROR(120,"您没有管理员权限，无权登录管理系统"),
     ;
 
     private final int status;
