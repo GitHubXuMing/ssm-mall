@@ -10,7 +10,7 @@ public class Category implements Serializable {
 
     private String name;
 
-    private Boolean status;
+    private Boolean status;//默认值为1
 
     private Integer sortOrder;
 
@@ -26,6 +26,11 @@ public class Category implements Serializable {
         this.sortOrder = sortOrder;
         this.createTime = createTime;
         this.updateTime = updateTime;
+    }
+
+    public Category(String name,Integer parentId) {
+        this.parentId = parentId;
+        this.name = name;
     }
 
     public Category() {

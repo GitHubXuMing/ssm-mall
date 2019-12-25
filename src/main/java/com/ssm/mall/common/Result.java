@@ -10,6 +10,7 @@ public enum Result {
     REGISTRY_SUCCESS(204,"注册成功"),
     PASSWORD_RESET_SUCCESS(205,"密码重置成功"),
     MODIFY_PASSWORD_SUCCESS(206,"修改密码成功" ),
+    CATEGORY_ADD_SUCCESS(207,"目录添加成功"),
     //用户模块-ERROR
     USER_ALREADY_EXIST(102,"用户名已存在"),
     USER_NOT_EXISTS(103,"用户名不存在"),
@@ -30,6 +31,8 @@ public enum Result {
     USER_NOT_FOUND(118,"该用户没有找到"),
     MODIFY_USER_ERROR(119,"修改用户信息失败"),
     ADMIN_LOGIN_ERROR(120,"您没有管理员权限，无权登录管理系统"),
+    CATEGORY_ADD_ERROR(121,"目录添加失败"),
+    ILLEAGLE_ARGUMENT(122,"非法参数"),
     ;
 
     private final int status;
