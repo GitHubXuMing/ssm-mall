@@ -85,12 +85,8 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.ssm.mall.dao.pojo.Category" >
     update t_category
     <set >
-      <if test="parentId != null" >
-        parent_id = #{parentId,jdbcType=INTEGER},
-      </if>
-      <if test="name != null" >
-        name = #{name,jdbcType=VARCHAR},
-      </if>
+      <if test="parentId != null" > parent_id = #{parentId,jdbcType=INTEGER},</if>
+      <if test="name != null" >name = #{name,jdbcType=VARCHAR},</if>
       <if test="status != null" >
         status = #{status,jdbcType=BIT},
       </if>
@@ -100,7 +96,7 @@
       <if test="createTime != null" >
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="updateTime != null" >
+      <if test="true" >
         update_time = now(),
       </if>
     </set>

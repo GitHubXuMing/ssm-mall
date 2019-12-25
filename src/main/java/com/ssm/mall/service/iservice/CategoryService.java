@@ -4,4 +4,7 @@ import com.ssm.mall.common.ServerRes;
 
 public interface CategoryService {
     public ServerRes addCategory(String categoryName,Integer parentId);
+
+    ServerRes updateCategory(Integer categoryId, String categoryName);
+
 }

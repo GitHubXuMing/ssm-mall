@@ -27,4 +27,19 @@ public class CategoryServiceImpl implements CategoryService {
         }
         return ServerRes.error(Result.CATEGORY_ADD_ERROR);
     }
+
+    @Override
+    public ServerRes updateCategory(Integer categoryId, String categoryName) {
+        if(StringUtils.isBlank(categoryName) || categoryId == null){
+            return ServerRes.error(Result.ILLEAGLE_ARGUMENT);
+        }
+        Category category = new Category(categoryId,categoryName);
+        int addFlag = categoryDao.updateByPrimaryKeySelective(category);
+        if(addFlag > 0){
+            return ServerRes.success(Result.CATEGORY_UPDATE_SUCCESS);
+        }
+        return ServerRes.error(Result.CATEGORY_UPDATE_ERROR);
+    }
+
+
 }

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
+
 @Controller
 @RequestMapping(value = "category")
 public class CategoryAdminAction {
@@ -21,15 +22,55 @@ public class CategoryAdminAction {
     private UserService userService;
     @Autowired
     private CategoryService categoryService;
-    @RequestMapping(value = "add.do",method = RequestMethod.POST)
-    public@ResponseBody  ServerRes addCategory(@RequestParam(value = "parentId",defaultValue = "0") Integer parentId,
-            String categoryName,HttpSession session){
+
+    /**
+     * 判断管理员权限并添加商品种类
+     *
+     * @param parentId
+     * @param categoryName
+     * @param session
+     * @return
+     */
+    @RequestMapping(value = "add.do", method = RequestMethod.POST)
+    public @ResponseBody
+    ServerRes addCategory(@RequestParam(value = "parentId", defaultValue = "0") Integer parentId,
+                          String categoryName, HttpSession session) {
         //验证是否已登录
         User user = (User) session.getAttribute(Const.CURRENT_USER);
-        if(user == null){return ServerRes.error(Result.NEED_LOGIN);}
+        if (user == null) {
+            return ServerRes.error(Result.NEED_LOGIN);
+        }
         //验证用户权限
-        if(user.getRole() != Const.Role.ADMIN){return ServerRes.error(Result.ADMIN_LOGIN_ERROR);}
+        if (user.getRole() != Const.Role.ADMIN) {
+            return ServerRes.error(Result.ADMIN_LOGIN_ERROR);
+        }
         //执行添加操作
-        return categoryService.addCategory(categoryName,parentId);
+        return categoryService.addCategory(categoryName, parentId);
     }
+
+    /**
+     * 判断管理员权限，修改品类的名称
+     * @param categoryId
+     * @param categoryName
+     * @param session
+     * @return
+     */
+    @RequestMapping(value = "update.do", method = RequestMethod.POST)
+    public @ResponseBody
+    ServerRes updateCategory(Integer categoryId, String categoryName, HttpSession session) {
+        //验证是否已登录
+        User user = (User) session.getAttribute(Const.CURRENT_USER);
+        if (user == null) {
+            return ServerRes.error(Result.NEED_LOGIN);
+        }
+        //验证用户权限
+        if (user.getRole() != Const.Role.ADMIN) {
+            return ServerRes.error(Result.ADMIN_LOGIN_ERROR);
+        }
+        //执行添加操作
+        return categoryService.updateCategory(categoryId, categoryName);
+    }
+
+
+
 }
