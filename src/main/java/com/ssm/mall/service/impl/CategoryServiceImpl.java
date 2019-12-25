@@ -9,6 +9,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service("categoryService")
 public class CategoryServiceImpl implements CategoryService {
     @Autowired
@@ -39,6 +41,23 @@ public class CategoryServiceImpl implements CategoryService {
             return ServerRes.success(Result.CATEGORY_UPDATE_SUCCESS);
         }
         return ServerRes.error(Result.CATEGORY_UPDATE_ERROR);
+    }
+
+    /**
+     * 根据parentId获取所有子节点集合
+     * @param parentId
+     * @return
+     */
+    @Override
+    public ServerRes<List<Category>> childrenCategory(Integer parentId) {
+        if(parentId == null){
+            return ServerRes.error(Result.ILLEAGLE_ARGUMENT);
+        }
+        List<Category> childrenCategory = categoryDao.selectByParentId(parentId);
+        if(childrenCategory == null || childrenCategory.size() == 0){
+            return ServerRes.error(Result.RESULT_ERROR);
+        }
+        return ServerRes.success(Result.RESULT_SUCCESS,childrenCategory);
     }
 
 

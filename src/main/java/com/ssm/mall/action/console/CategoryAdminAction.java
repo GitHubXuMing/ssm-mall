@@ -3,6 +3,7 @@ package com.ssm.mall.action.console;
 import com.ssm.mall.common.Const;
 import com.ssm.mall.common.Result;
 import com.ssm.mall.common.ServerRes;
+import com.ssm.mall.dao.pojo.Category;
 import com.ssm.mall.dao.pojo.User;
 import com.ssm.mall.service.iservice.CategoryService;
 import com.ssm.mall.service.iservice.UserService;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 @RequestMapping(value = "category")
@@ -67,10 +69,31 @@ public class CategoryAdminAction {
         if (user.getRole() != Const.Role.ADMIN) {
             return ServerRes.error(Result.ADMIN_LOGIN_ERROR);
         }
-        //执行添加操作
+        //执行更新操作
         return categoryService.updateCategory(categoryId, categoryName);
     }
 
+    /**
+     * 获得指定parentId的所有平级子节点
+     * @param parentId
+     * @param session
+     * @return
+     */
+    @RequestMapping(value = "children.do", method = RequestMethod.POST)
+    public @ResponseBody
+    ServerRes<List<Category>> childrenCategory(Integer parentId,HttpSession session) {
+        //验证是否已登录
+        User user = (User) session.getAttribute(Const.CURRENT_USER);
+        if (user == null) {
+            return ServerRes.error(Result.NEED_LOGIN);
+        }
+        //验证用户权限
+        if (user.getRole() != Const.Role.ADMIN) {
+            return ServerRes.error(Result.ADMIN_LOGIN_ERROR);
+        }
+        //执行查询操作
+        return categoryService.childrenCategory(parentId);
+    }
 
 
 }
