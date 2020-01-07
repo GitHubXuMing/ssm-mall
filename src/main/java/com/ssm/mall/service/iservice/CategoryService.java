@@ -23,10 +23,17 @@ public interface CategoryService {
     ServerRes updateCategory(Integer categoryId, String categoryName);
 
     /**
-     * 获得指定parentId的所有平级子目录
+     * 获得指定parentId的所有平级子目录,非递归
      * @param parentId
      * @return
      */
     ServerRes<List<Category>> childrenCategory(Integer parentId);
+
+    /**
+     * 查询当前节点及所有递归子节点（深度递归）
+     * @param categoryId
+     * @return
+     */
+    ServerRes<List<Category>> getDeepCategory(Integer categoryId);
 
 }

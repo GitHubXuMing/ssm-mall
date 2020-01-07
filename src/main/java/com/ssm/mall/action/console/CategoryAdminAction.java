@@ -21,17 +21,9 @@ import java.util.List;
 @RequestMapping(value = "category")
 public class CategoryAdminAction {
     @Autowired
-    private UserService userService;
-    @Autowired
     private CategoryService categoryService;
-
     /**
      * 判断管理员权限并添加商品种类
-     *
-     * @param parentId
-     * @param categoryName
-     * @param session
-     * @return
      */
     @RequestMapping(value = "add.do", method = RequestMethod.POST)
     public @ResponseBody
@@ -52,10 +44,6 @@ public class CategoryAdminAction {
 
     /**
      * 判断管理员权限，修改品类的名称
-     * @param categoryId
-     * @param categoryName
-     * @param session
-     * @return
      */
     @RequestMapping(value = "update.do", method = RequestMethod.POST)
     public @ResponseBody
@@ -74,14 +62,12 @@ public class CategoryAdminAction {
     }
 
     /**
-     * 获得指定parentId的所有平级子节点
-     * @param parentId
-     * @param session
-     * @return
+     * 根据提供的parentId，获得下一级的所有子节点（非递归）
      */
     @RequestMapping(value = "children.do", method = RequestMethod.POST)
     public @ResponseBody
-    ServerRes<List<Category>> childrenCategory(Integer parentId,HttpSession session) {
+    ServerRes<List<Category>> childrenCategory(@RequestParam(value = "parentId",defaultValue = "0") Integer parentId
+            ,HttpSession session) {
         //验证是否已登录
         User user = (User) session.getAttribute(Const.CURRENT_USER);
         if (user == null) {
@@ -95,5 +81,23 @@ public class CategoryAdminAction {
         return categoryService.childrenCategory(parentId);
     }
 
-
+    /**
+     * 查询当前节点及所有递归子节点（深度递归）
+     */
+    @RequestMapping(value = "deep_children.do", method = RequestMethod.POST)
+    public @ResponseBody ServerRes<List<Category>> deepChildrenCategory(
+            @RequestParam(value = "categoryId",defaultValue = "0") Integer categoryId,
+            HttpSession session) {
+        //验证是否已登录
+        User user = (User) session.getAttribute(Const.CURRENT_USER);
+        if (user == null) {
+            return ServerRes.error(Result.NEED_LOGIN);
+        }
+        //验证用户权限
+        if (user.getRole() != Const.Role.ADMIN) {
+            return ServerRes.error(Result.ADMIN_LOGIN_ERROR);
+        }
+        //执行查询操作
+        return categoryService.getDeepCategory(categoryId);
+    }
 }
