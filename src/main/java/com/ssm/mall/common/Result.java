@@ -38,8 +38,17 @@ public enum Result {
     ILLEAGLE_ARGUMENT(122,"非法参数"),
     CATEGORY_UPDATE_ERROR(123,"商品目录更新失败"),
     CATEGORY_NO_CHILDREN(124,"该商品目录没有子目录"),
-    ;
-
+    //3-商品管理模块
+    INSERT_PRODUCT_SUCCESS(301,"商品插入成功"),
+    UPDATE_PRODUCT_SUCCESS(302,"商品修改成功"),
+    UPDATE_STATUS_SUCCESS(303,"更新商品状态（上架或下架）成功"),
+    PRODUCT_DETAIL_SUCCESS(304,"获取商品信息成功"),
+    NEED_ADMIN_LOGIN(361,"请登录管理员账号后，进行操作"),
+    INSERT_PRODUCT_ERROR(362,"商品插入失败"),
+    UPDATE_PRODUCT_ERROR(362,"商品修改失败"),
+    UPDATE_STATUS_ERROR(363,"更新商品状态（上架或下架）失败"),
+    PRODUCT_NOT_FOUND(364,"商品已下架或删除"),
+    PRODUCT_DETAIL_ERROR(365,"获取商品信息失败");
     private final int status;
     private final String msg;
 
