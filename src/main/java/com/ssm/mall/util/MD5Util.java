@@ -48,6 +48,7 @@ public class MD5Util {
     public static String MD5EncodeUtf8(String origin) {
         //为字符串追加MD5盐值
         origin = origin + PropertyUtil.getProperty("password.salt", "");
+        System.err.println("************加了盐值之后的密码内容是："+origin);
         //MD5盐值加密，返回utf-8的数据格式
         return MD5Encode(origin, "utf-8");
     }

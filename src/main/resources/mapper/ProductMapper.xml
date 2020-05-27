@@ -27,6 +27,24 @@
     from t_product
     where id = #{id,jdbcType=INTEGER}
   </select>
+    <select id="selectList" resultMap="BaseResultMap">
+      select
+      <include refid="Base_Column_List"/>
+      from t_product order by id
+    </select>
+  <select id="searchByIdName" resultMap="BaseResultMap" parameterType="map">
+    select
+    <include refid="Base_Column_List"/>
+    from t_product
+    <where>
+      <if test="name != null">
+        and name like #{name}
+      </if>
+      <if test="id != null">
+        and id = #{id}
+      </if>
+    </where>
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from t_product
     where id = #{id,jdbcType=INTEGER}
