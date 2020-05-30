@@ -24,4 +24,7 @@ public interface ProductDao {
     List<Product> selectList();
 
     List<Product> searchByIdName(@Param("id") Integer id,@Param("name") String name);
+
+    List<Product> selectByKeywordsCategoryIds(
+            @Param("keywords") String keywords,@Param("categoryIds") List<Integer> categoryIds);
 }

@@ -1,5 +1,9 @@
 package com.ssm.mall.common;
 
+import com.google.common.collect.Sets;
+
+import java.util.Set;
+
 public interface Const {
     String CURRENT_USER = "current_user";
     String TOKEN_PREFIX = "token_";//设定token令牌前缀
@@ -13,5 +17,9 @@ public interface Const {
     interface Role{
         Integer ADMIN = 0;
         Integer USER = 1;
+    }
+    interface Product{
+        Integer ON_SALE = 1;
+        Set<String> PRICE_ASC_DESC = Sets.newHashSet("price_asc","price_desc");
     }
 }

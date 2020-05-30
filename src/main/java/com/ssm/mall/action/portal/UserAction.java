@@ -1,11 +1,10 @@
-package com.ssm.mall.action.protal;
+package com.ssm.mall.action.portal;
 
 import com.ssm.mall.common.Const;
 import com.ssm.mall.common.Result;
 import com.ssm.mall.common.ServerRes;
 import com.ssm.mall.dao.pojo.User;
 import com.ssm.mall.service.iservice.UserService;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
