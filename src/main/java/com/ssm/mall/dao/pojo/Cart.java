@@ -18,6 +18,13 @@ public class Cart implements Serializable {
 
     private Date updateTime;
 
+    public Cart(Integer userId, Integer productId, Integer quantity, Integer checked) {
+        this.userId = userId;
+        this.productId = productId;
+        this.quantity = quantity;
+        this.checked = checked;
+    }
+
     public Cart(Integer id, Integer userId, Integer productId, Integer quantity, Integer checked, Date createTime, Date updateTime) {
         this.id = id;
         this.userId = userId;

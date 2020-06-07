@@ -22,4 +22,10 @@ public interface Const {
         Integer ON_SALE = 1;
         Set<String> PRICE_ASC_DESC = Sets.newHashSet("price_asc","price_desc");
     }
+    interface Cart{
+        Integer CHECKED = 1;//选中
+        Integer UNCHECKED = 0;//未选中
+        String QUANTITY_OUT_OF_STOCK = "购买数量超出库存数量";
+        String QUANTITY_SUCCESS = "库存充足";
+    }
 }

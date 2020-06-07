@@ -18,7 +18,7 @@ public enum Result {
     REGISTRY_ILLEAGEL_ARGUMENT(106,"参数类型错误，只能选择用户名或EMAIL邮箱"),
     REGISTRY_ERROR(107,"注册失败"),
     CONFIG_READ_ERROR(108,"属性配置文件读取异常"),
-    NEED_LOGIN(109,"无法查看用户信息，请先登录"),
+    NEED_LOGIN(109,"请先登录"),
     NO_PASSWORD_RESET_QUESTION(110,"对不起，您没有设置重置密码的预设问题"),
     PASSWORD_RESET_ANSWER_ERROR(111,"预设问题答案不符，无法重置密码"),
     NEED_TOKEN(112,"参数错误，需要传递token令牌"),
