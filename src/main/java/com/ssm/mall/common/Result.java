@@ -1,8 +1,6 @@
 package com.ssm.mall.common;
 //使用枚举，实现统一异常处理
 public enum Result {
-    RESULT_SUCCESS(200,"success"),
-    RESULT_ERROR(500,"error"),
     //用户模块-SUCCESS
     LOGIN_SUCCESS(201,"登录成功"),
     LOGOUT_SUCCESS(202,"注销成功"),
@@ -50,8 +48,25 @@ public enum Result {
     UPDATE_PRODUCT_ERROR(362,"商品修改失败"),
     UPDATE_STATUS_ERROR(363,"更新商品状态（上架或下架）失败"),
     PRODUCT_NOT_FOUND(364,"商品已下架或删除"),
-    PRODUCT_UPLOAD_IMAGE_ERROR(365,"上传商品图片失败");
-
+    PRODUCT_UPLOAD_IMAGE_ERROR(365,"上传商品图片失败"),
+    //4-支付和订单模块
+    ORDER_NOT_FOUND(701,"该用户没有此订单，请审核订单编号是否正确"),
+    ALIPAY_TRADE_FAILED(702,"支付宝预下单失败!!!"),
+    ALIPAY_TRADE_STATE_UNKNOWN(703,"系统异常，预下单状态未知!!!"),
+    ALIPAY_TRADE_NOT_SUPPLY(704,"不支持的交易状态，交易返回异常!!!"),
+    ALIPAY_ILLEGAL_REQUEST_WARN(705,"非法的支付宝请求，如再次请求，将上报网警"),
+    NO_CART_SELECTED(706,"购物车中没有产品被选中，无法生成订单"),
+    PRODUCT_SALE_FAILED(707,"产品销售状态非在售"),
+    STOCK_NOT_ENOUGH(708,"产品库存不足"),
+    ORDER_CREATE_FAILED(709,"订单生成失败"),
+    ORDER_ITEMS_BATCH_INSERT_FAILED(710,"订单详情批量插入错误"),
+    ORDER_CREATE_SUCCESS(711,"订单生成成功"),
+    ORDER_CANCEL_FAILED_ALEADY_PAY(712,"订单已支付，无法取消"),
+    HAVE_NO_ORDERS(713,"该用户没有订单"),
+    ORDER_NOT_PAY(714,"订单尚未支付"),
+    //9-通用的成功或失败
+    RESULT_SUCCESS(200,"success"),
+    RESULT_ERROR(500,"error");
     private final int status;
     private final String msg;
 
@@ -67,4 +82,7 @@ public enum Result {
     public String getMsg() {
         return msg;
     }
+
+
+
 }

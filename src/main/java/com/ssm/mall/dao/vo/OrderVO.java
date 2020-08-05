@@ -1,29 +1,21 @@
-package com.ssm.mall.dao.pojo;
+package com.ssm.mall.dao.vo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.ssm.mall.dao.pojo.Item;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
-public class Order implements Serializable {
-    private Integer id;
-
+public class OrderVO {
     private Long orderNo;
-
-    private Integer userId;
-
-    private Integer shippingId;
-
     private BigDecimal payment;
-
     private Integer paymentType;
-
+    private String paymentTypeDesc;
     private Integer postage;
-
     private Integer status;
-
+    private String statusDesc;
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date paymentTime;
@@ -39,38 +31,14 @@ public class Order implements Serializable {
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date updateTime;
-
-    public Order(Integer id, Long orderNo, Integer userId, Integer shippingId, BigDecimal payment, Integer paymentType, Integer postage, Integer status, Date paymentTime, Date sendTime, Date endTime, Date closeTime, Date createTime, Date updateTime) {
-        this.id = id;
-        this.orderNo = orderNo;
-        this.userId = userId;
-        this.shippingId = shippingId;
-        this.payment = payment;
-        this.paymentType = paymentType;
-        this.postage = postage;
-        this.status = status;
-        this.paymentTime = paymentTime;
-        this.sendTime = sendTime;
-        this.endTime = endTime;
-        this.closeTime = closeTime;
-        this.createTime = createTime;
-        this.updateTime = updateTime;
-    }
-
-    public Order() {
-        super();
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
+    //订单明细
+    List<ItemVO> itemVOList;
+    //图片服务器地址
+    private String imageHost;
+    //收货信息
+    private Integer shippingId;
+    private String receiverName;
+    private ShippingVO shippingVO;
 
     public Long getOrderNo() {
         return orderNo;
@@ -78,22 +46,6 @@ public class Order implements Serializable {
 
     public void setOrderNo(Long orderNo) {
         this.orderNo = orderNo;
-    }
-
-    public Integer getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Integer userId) {
-        this.userId = userId;
-    }
-
-    public Integer getShippingId() {
-        return shippingId;
-    }
-
-    public void setShippingId(Integer shippingId) {
-        this.shippingId = shippingId;
     }
 
     public BigDecimal getPayment() {
@@ -112,6 +64,14 @@ public class Order implements Serializable {
         this.paymentType = paymentType;
     }
 
+    public String getPaymentTypeDesc() {
+        return paymentTypeDesc;
+    }
+
+    public void setPaymentTypeDesc(String paymentTypeDesc) {
+        this.paymentTypeDesc = paymentTypeDesc;
+    }
+
     public Integer getPostage() {
         return postage;
     }
@@ -126,6 +86,14 @@ public class Order implements Serializable {
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public String getStatusDesc() {
+        return statusDesc;
+    }
+
+    public void setStatusDesc(String statusDesc) {
+        this.statusDesc = statusDesc;
     }
 
     public Date getPaymentTime() {
@@ -168,31 +136,43 @@ public class Order implements Serializable {
         this.createTime = createTime;
     }
 
-    public Date getUpdateTime() {
-        return updateTime;
+    public List<ItemVO> getItemVOList() {
+        return itemVOList;
     }
 
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
+    public void setItemVOList(List<ItemVO> itemVOList) {
+        this.itemVOList = itemVOList;
     }
 
-    @Override
-    public String toString() {
-        return "Order{" +
-                "id=" + id +
-                ", orderNo=" + orderNo +
-                ", userId=" + userId +
-                ", shippingId=" + shippingId +
-                ", payment=" + payment +
-                ", paymentType=" + paymentType +
-                ", postage=" + postage +
-                ", status=" + status +
-                ", paymentTime=" + paymentTime +
-                ", sendTime=" + sendTime +
-                ", endTime=" + endTime +
-                ", closeTime=" + closeTime +
-                ", createTime=" + createTime +
-                ", updateTime=" + updateTime +
-                '}';
+    public String getImageHost() {
+        return imageHost;
+    }
+
+    public void setImageHost(String imageHost) {
+        this.imageHost = imageHost;
+    }
+
+    public Integer getShippingId() {
+        return shippingId;
+    }
+
+    public void setShippingId(Integer shippingId) {
+        this.shippingId = shippingId;
+    }
+
+    public String getReceiverName() {
+        return receiverName;
+    }
+
+    public void setReceiverName(String receiverName) {
+        this.receiverName = receiverName;
+    }
+
+    public ShippingVO getShippingVO() {
+        return shippingVO;
+    }
+
+    public void setShippingVO(ShippingVO shippingVO) {
+        this.shippingVO = shippingVO;
     }
 }

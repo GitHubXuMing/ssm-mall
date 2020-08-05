@@ -1,6 +1,10 @@
 package com.ssm.mall.dao;
 
 import com.ssm.mall.dao.pojo.Item;
+import com.ssm.mall.dao.vo.ItemVO;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface ItemDao {
     int deleteByPrimaryKey(Integer id);
@@ -14,4 +18,10 @@ public interface ItemDao {
     int updateByPrimaryKeySelective(Item record);
 
     int updateByPrimaryKey(Item record);
+
+    List<Item> selectAllByUseridAndOrderno(@Param("userId") Integer userId, @Param("orderNo") Long orderNo);
+
+    int batchInsertItems(@Param("itemList") List<Item> itemList);
+
+    List<Item> selectAllByOrderNo(@Param("orderNo") Long orderNo);
 }

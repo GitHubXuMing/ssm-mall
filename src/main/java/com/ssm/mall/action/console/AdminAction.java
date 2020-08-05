@@ -19,7 +19,7 @@ public class AdminAction {
     @Autowired
     UserService userService;
     @RequestMapping(value = "login.do",method = RequestMethod.POST)
-    public @ResponseBody    ServerRes<User> login(String username, String password, HttpSession session){
+    public @ResponseBody ServerRes<User> login(String username, String password, HttpSession session){
         ServerRes<User> sr = userService.login(username,password);
         User user = sr.getData();
         if(user != null){

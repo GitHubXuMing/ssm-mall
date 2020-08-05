@@ -34,4 +34,6 @@ public interface CartDao {
                                   @Param("checked") Integer checked);
 
    Integer productCount(@Param("userId") Integer userId);
+
+   List<Cart> selectCheckedCarts(@Param("userId") Integer userId);
 }
